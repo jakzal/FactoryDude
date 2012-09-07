@@ -1,0 +1,35 @@
+{
+    "hash": "6cf99e89f8af0a4de136450bf90b3c66",
+    "packages": [
+        {
+            "package": "mockery/mockery",
+            "version": "0.7.2"
+        },
+        {
+            "package": "phpspec/phpspec2",
+            "version": "dev-master",
+            "source-reference": "ea479e7fd3a5e846a6a730332b54ada2a7e52898",
+            "commit-date": "1346970080"
+        },
+        {
+            "package": "symfony/console",
+            "version": "v2.1.0"
+        },
+        {
+            "package": "symfony/event-dispatcher",
+            "version": "v2.1.0"
+        },
+        {
+            "package": "symfony/finder",
+            "version": "v2.1.0"
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "phpspec/phpspec2": 20
+    }
+}
