@@ -5,14 +5,14 @@ namespace FactoryDude;
 interface TestDataBuilderInterface
 {
     /**
+     * @param string @className
+     */
+    public function __construct($className);
+
+    /**
      * @return mixed
      */
     public function build();
-
-    /**
-     * @return string
-     */
-    public function getClassName();
 
     /**
      * @param string $propertyName

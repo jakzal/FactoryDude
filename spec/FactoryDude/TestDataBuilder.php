@@ -13,7 +13,7 @@ class TestDataBuilder implements Specification
         ));
     }
 
-    public function it_should_return_class_name()
+    public function it_should_return_a_class_name()
     {
         $this->testDataBuilder->getClassName()
             ->shouldBe('spec\\FactoryDude\\Fixtures\\Entity\\User');

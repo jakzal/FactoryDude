@@ -6,11 +6,11 @@ use FactoryDude\TestDataBuilderInterface;
 
 class UserBuilder implements TestDataBuilderInterface
 {
-    public function build()
+    public function __construct($className)
     {
     }
 
-    public function getClassName()
+    public function build()
     {
     }
 
