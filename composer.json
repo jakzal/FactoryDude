@@ -11,6 +11,12 @@
             "url": "https://github.com/jakzal/phpspec2"
         }
     ],
+    "autoload": {
+        "psr-0": {
+            "FactoryDude": "src/",
+            "spec": "."
+        }
+    },
     "config": {
         "bin-dir": "bin"
     }
