@@ -8,7 +8,7 @@ class TestDataBuilder implements Specification
 {
     public function described_with()
     {
-        $this->object->isAnInstanceOf('FactoryDude\\TestDataBuilder', array(
+        $this->testDataBuilder->isAnInstanceOf('FactoryDude\\TestDataBuilder', array(
             'spec\\FactoryDude\\Fixtures\\Entity\\User'
         ));
     }
