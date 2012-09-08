@@ -77,4 +77,21 @@ class TestDataBuilder implements Specification
         $entity->getId()->shouldReturn(13);
         $entity->getName()->shouldReturn('Kuba');
     }
+
+    public function it_should_accept_magic_calls_to_set_properties()
+    {
+        $entity = $this->testDataBuilder
+            ->withId(13)
+            ->withName('Kuba')
+            ->build();
+
+        $entity->getId()->shouldReturn(13);
+        $entity->getName()->shouldReturn('Kuba');
+    }
+
+    public function it_should_complain_for_unkown_method()
+    {
+        $this->testDataBuilder->shouldThrow('RuntimeException')->during('withId');
+        $this->testDataBuilder->shouldThrow('RuntimeException')->during('getId');
+    }
 }
