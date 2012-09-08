@@ -45,7 +45,8 @@ class TestDataBuilder implements Specification
     public function it_should_complain_if_entity_property_does_not_exist()
     {
         $this->testDataBuilder
-            ->with('build', array('gender', 'male'))
-            ->shouldThrow('RuntimeException');
+            ->with('gender', 'male')
+            ->shouldThrow('RuntimeException')
+            ->during('build');
     }
 }
