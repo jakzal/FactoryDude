@@ -33,6 +33,11 @@ class TestDataBuilder implements TestDataBuilderInterface
             if (!property_exists($entity, $propertyName)) {
                 throw new \RuntimeException();
             }
+
+            if (is_callable($value)) {
+                $value = call_user_func($value);
+            }
+
             $property = new \ReflectionProperty($this->className, $propertyName);
             $property->setAccessible(true);
             $property->setValue($entity, $value);

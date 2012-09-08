@@ -55,4 +55,15 @@ class TestDataBuilder implements Specification
             ->shouldThrow('RuntimeException')
             ->during('build');
     }
+
+    public function it_should_call_a_callable_when_building_entity()
+    {
+        $this->testDataBuilder->with('name', function () { static $i = 1; return 'Jakub '.($i++); });
+
+        $entity1 = $this->testDataBuilder->build();
+        $entity2 = $this->testDataBuilder->build();
+
+        $entity1->getName()->shouldReturn('Jakub 1');
+        $entity2->getName()->shouldReturn('Jakub 2');
+    }
 }
