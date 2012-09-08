@@ -10,19 +10,21 @@ class FactoryDude
     private $aliases = array();
 
     /**
+     * @param arra $builderClassNames
+     */
+    private $builderClassNames = array();
+
+    /**
      * @param string $className A class name or its alias
      *
      * @return TestDataBuilder
      */
     public function get($className)
     {
-        $className = isset($this->aliases[$className]) ? $this->aliases[$className] : $className;
+        $className = $this->getClassName($className);
+        $builderClassName = $this->getBuilderClassName($className);
 
-        if (!class_exists($className)) {
-            throw new \RuntimeException(sprintf('Unknown class or alias: "%s"', $className));
-        }
-
-        return new TestDataBuilder($className);
+        return new $builderClassName($className);
     }
 
     /**
@@ -32,5 +34,51 @@ class FactoryDude
     public function setAlias($alias, $className)
     {
         $this->aliases[$alias] = $className;
+    }
+
+    /**
+     * @param string $entityClassName
+     * @param string $builderClassName
+     */
+    public function setBuilderClass($entityClassName, $builderClassName)
+    {
+        $builderClass = new \ReflectionClass($builderClassName);
+        if (!$builderClass->implementsInterface('FactoryDude\TestDataBuilderInterface')) {
+            throw new \RuntimeException('Builder has to implement FactoryDude\TestDataBuilderInterface');
+        }
+
+        $this->builderClassNames[$entityClassName] = $builderClassName;
+    }
+
+    /**
+     * @param string $aliasOrClassName
+     *
+     * @return string
+     */
+    protected function getClassName($aliasOrClassName)
+    {
+        $className = isset($this->aliases[$aliasOrClassName]) ? $this->aliases[$aliasOrClassName] : $aliasOrClassName;
+
+        if (!class_exists($className)) {
+            throw new \RuntimeException(sprintf('Unknown class or alias: "%s"', $className));
+        }
+
+        return $className;
+    }
+
+    /**
+     * @param string $builderClassName
+     *
+     * @return string
+     */
+    protected function getBuilderClassName($className)
+    {
+        $builderClassName = '\\FactoryDude\\TestDataBuilder';
+
+        if (isset($this->builderClassNames[$className])) {
+             $builderClassName = $this->builderClassNames[$className];
+        }
+
+        return $builderClassName;
     }
 }

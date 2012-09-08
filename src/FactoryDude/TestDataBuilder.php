@@ -2,7 +2,7 @@
 
 namespace FactoryDude;
 
-class TestDataBuilder
+class TestDataBuilder implements TestDataBuilderInterface
 {
     /**
      * @param string $className
