@@ -11,8 +11,8 @@
         {
             "package": "phpspec/phpspec2",
             "version": "dev-master",
-            "source-reference": "7d63f6d0fb37413a88db199f9cedd34e9555ba4b",
-            "commit-date": "1347102084"
+            "source-reference": "d74c92314d1bdcafc90ec0d6af9f0d1b697adaa5",
+            "commit-date": "1347138483"
         },
         {
             "package": "symfony/console",
