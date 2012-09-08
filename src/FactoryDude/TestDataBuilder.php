@@ -42,6 +42,14 @@ class TestDataBuilder
     }
 
     /**
+     * @return string
+     */
+    public function getClassName()
+    {
+        return $this->className;
+    }
+
+    /**
      * @param string $propertyName
      * @param mixed  $value
      *

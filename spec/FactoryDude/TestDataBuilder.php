@@ -13,6 +13,12 @@ class TestDataBuilder implements Specification
         ));
     }
 
+    public function it_should_return_class_name()
+    {
+        $this->testDataBuilder->getClassName()
+            ->shouldBe('spec\\FactoryDude\\Fixtures\\Entity\\User');
+    }
+
     public function it_should_create_an_entity_with_defaults()
     {
         $entity = $this->testDataBuilder->build();
