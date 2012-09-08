@@ -10,7 +10,7 @@ class UserBuilder implements TestDataBuilderInterface
     {
     }
 
-    public function build()
+    public function build(array $values = array())
     {
     }
 

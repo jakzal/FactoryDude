@@ -23,13 +23,16 @@ class TestDataBuilder implements TestDataBuilderInterface
     }
 
     /**
+     * @param array $values
+     *
      * @return mixed
      */
-    public function build()
+    public function build(array $values = array())
     {
         $entity = new $this->className();
+        $properties = array_merge($this->properties, $values);
 
-        foreach ($this->properties as $propertyName => $value) {
+        foreach ($properties as $propertyName => $value) {
             if (!property_exists($entity, $propertyName)) {
                 throw new \RuntimeException();
             }

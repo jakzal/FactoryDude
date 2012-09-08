@@ -66,4 +66,15 @@ class TestDataBuilder implements Specification
         $entity1->getName()->shouldReturn('Jakub 1');
         $entity2->getName()->shouldReturn('Jakub 2');
     }
+
+    public function it_should_accept_values_to_overwrite_defaults()
+    {
+        $entity = $this->testDataBuilder
+            ->with('id', 13)
+            ->with('name', 'Jakub')
+            ->build(array('name' => 'Kuba'));
+
+        $entity->getId()->shouldReturn(13);
+        $entity->getName()->shouldReturn('Kuba');
+    }
 }
