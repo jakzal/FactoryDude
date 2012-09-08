@@ -17,7 +17,7 @@ class FactoryDude
     /**
      * @param string $className A class name or its alias
      *
-     * @return TestDataBuilder
+     * @return TestDataBuilderInterface
      */
     public function get($className)
     {
