@@ -2,7 +2,7 @@
 
 namespace FactoryDude\TestDataBuilder;
 
-class EntityBuilder extends TestDataBuilder
+class EntityBuilder extends ArrayBuilder
 {
     /**
      * @param string $className
@@ -27,26 +27,9 @@ class EntityBuilder extends TestDataBuilder
      */
     public function build(array $values = array())
     {
-        $defaults = array();
-        foreach ($this->keys() as $key) {
-            $defaults[$key] = $this[$key];
-        }
-        $properties = array_merge($defaults, $values);
-        $entity = new $this->className();
-
-        foreach ($properties as $propertyName => $value) {
-            if (!property_exists($entity, $propertyName)) {
-                throw new \RuntimeException(sprintf('Property does not exist: "%s"', $propertyName));
-            }
-
-            if (is_callable($value)) {
-                $value = $value($this);
-            }
-
-            $property = new \ReflectionProperty($this->className, $propertyName);
-            $property->setAccessible(true);
-            $property->setValue($entity, $value);
-        }
+        $properties = parent::build($values);
+        $entity = $this->buildEntity();
+        $this->populateEntity($entity, $properties);
 
         return $entity;
     }
@@ -54,8 +37,33 @@ class EntityBuilder extends TestDataBuilder
     /**
      * @return string
      */
-    public function getClassName()
+    protected function getClassName()
     {
         return $this->className;
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function buildEntity()
+    {
+        return new $this->className();
+    }
+
+    /**
+     * @param mixed $entity
+     * @param array $properties
+     */
+    protected function populateEntity($entity, array $properties)
+    {
+        foreach ($properties as $propertyName => $value) {
+            if (!property_exists($entity, $propertyName)) {
+                throw new \RuntimeException(sprintf('Property does not exist: "%s"', $propertyName));
+            }
+
+            $property = new \ReflectionProperty($this->className, $propertyName);
+            $property->setAccessible(true);
+            $property->setValue($entity, $value);
+        }
     }
 }

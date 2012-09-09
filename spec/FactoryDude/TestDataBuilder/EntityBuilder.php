@@ -13,12 +13,6 @@ class EntityBuilder implements Specification
         ));
     }
 
-    public function it_should_return_a_class_name()
-    {
-        $this->entityBuilder->getClassName()
-            ->shouldBe('spec\\FactoryDude\\TestDataBuilder\\Fixtures\\Entity\\User');
-    }
-
     public function it_should_create_an_entity_with_defaults()
     {
         $entity = $this->entityBuilder->build();
