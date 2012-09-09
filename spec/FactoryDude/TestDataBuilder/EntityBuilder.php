@@ -4,24 +4,24 @@ namespace spec\FactoryDude\TestDataBuilder;
 
 use PHPSpec2\Specification;
 
-class TestDataBuilder implements Specification
+class EntityBuilder implements Specification
 {
     public function described_with()
     {
-        $this->testDataBuilder->isAnInstanceOf('FactoryDude\\TestDataBuilder\\TestDataBuilder', array(
+        $this->entityBuilder->isAnInstanceOf('FactoryDude\\TestDataBuilder\\EntityBuilder', array(
             'spec\\FactoryDude\\TestDataBuilder\\Fixtures\\Entity\\User'
         ));
     }
 
     public function it_should_return_a_class_name()
     {
-        $this->testDataBuilder->getClassName()
+        $this->entityBuilder->getClassName()
             ->shouldBe('spec\\FactoryDude\\TestDataBuilder\\Fixtures\\Entity\\User');
     }
 
     public function it_should_create_an_entity_with_defaults()
     {
-        $entity = $this->testDataBuilder->build();
+        $entity = $this->entityBuilder->build();
 
         $entity->shouldBeAnInstanceOf('spec\\FactoryDude\\TestDataBuilder\\Fixtures\\Entity\\User');
         $entity->getId()->shouldReturn(null);
@@ -31,15 +31,28 @@ class TestDataBuilder implements Specification
 
     public function it_should_set_up_public_entity_properties()
     {
-        $entity = $this->testDataBuilder->with('name', 'Kuba')->build();
+        $entity = $this->entityBuilder->with('name', 'Kuba')->build();
 
+        $entity->getName()->shouldReturn('Kuba');
+    }
+
+    public function it_should_set_up_defaults()
+    {
+        $this->entityBuilder->isAnInstanceOf('FactoryDude\\TestDataBuilder\\EntityBuilder', array(
+            'spec\\FactoryDude\\TestDataBuilder\\Fixtures\\Entity\\User',
+            array('id' => 14, 'name' => function ($container) { return 'Kuba'; })
+        ));
+
+        $entity = $this->entityBuilder->build();
+
+        $entity->getId()->shouldReturn(14);
         $entity->getName()->shouldReturn('Kuba');
     }
 
     public function it_should_set_up_private_entity_properties()
     {
         $date = new \DateTime('-1 day');
-        $entity = $this->testDataBuilder
+        $entity = $this->entityBuilder
             ->with('id', 13)
             ->with('createdAt', $date)
             ->build();
@@ -50,7 +63,7 @@ class TestDataBuilder implements Specification
 
     public function it_should_complain_if_entity_property_does_not_exist()
     {
-        $this->testDataBuilder
+        $this->entityBuilder
             ->with('gender', 'male')
             ->shouldThrow('RuntimeException')
             ->during('build');
@@ -58,10 +71,10 @@ class TestDataBuilder implements Specification
 
     public function it_should_call_a_callable_when_building_entity()
     {
-        $this->testDataBuilder->with('name', function () { static $i = 1; return 'Jakub '.($i++); });
+        $this->entityBuilder->with('name', function () { static $i = 1; return 'Jakub '.($i++); });
 
-        $entity1 = $this->testDataBuilder->build();
-        $entity2 = $this->testDataBuilder->build();
+        $entity1 = $this->entityBuilder->build();
+        $entity2 = $this->entityBuilder->build();
 
         $entity1->getName()->shouldReturn('Jakub 1');
         $entity2->getName()->shouldReturn('Jakub 2');
@@ -69,7 +82,7 @@ class TestDataBuilder implements Specification
 
     public function it_should_accept_values_to_overwrite_defaults()
     {
-        $entity = $this->testDataBuilder
+        $entity = $this->entityBuilder
             ->with('id', 13)
             ->with('name', 'Jakub')
             ->build(array('name' => 'Kuba'));
@@ -78,9 +91,18 @@ class TestDataBuilder implements Specification
         $entity->getName()->shouldReturn('Kuba');
     }
 
+    public function it_should_accept_callbacks_to_overwrite_defaults()
+    {
+        $entity = $this->entityBuilder
+            ->with('name', 'Jakub')
+            ->build(array('name' => function ($container) { return 'Kuba'; }));
+
+        $entity->getName()->shouldReturn('Kuba');
+    }
+
     public function it_should_accept_magic_calls_to_set_properties()
     {
-        $entity = $this->testDataBuilder
+        $entity = $this->entityBuilder
             ->withId(13)
             ->withName('Kuba')
             ->build();
@@ -91,7 +113,7 @@ class TestDataBuilder implements Specification
 
     public function it_should_complain_for_unkown_method()
     {
-        $this->testDataBuilder->shouldThrow('RuntimeException')->during('withId');
-        $this->testDataBuilder->shouldThrow('RuntimeException')->during('getId');
+        $this->entityBuilder->shouldThrow('RuntimeException')->during('withId');
+        $this->entityBuilder->shouldThrow('RuntimeException')->during('getId');
     }
 }

@@ -1,9 +1,11 @@
 {
-    "hash": "d16aff8dd5f3462ba5781256955d93e4",
+    "hash": "5988cd019c4e6d2e8f95df5a19f734a3",
     "packages": [
         {
             "package": "pimple/pimple",
-            "version": "1.0.0"
+            "version": "dev-master",
+            "source-reference": "db836b8cfadc0f39dacafa2bf311a1ab603600bb",
+            "commit-date": "1343051648"
         }
     ],
     "packages-dev": [
@@ -35,6 +37,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "pimple/pimple": 20,
         "phpspec/phpspec2": 20
     }
 }
