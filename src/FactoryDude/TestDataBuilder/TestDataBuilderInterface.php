@@ -1,14 +1,9 @@
 <?php
 
-namespace FactoryDude;
+namespace FactoryDude\TestDataBuilder;
 
 interface TestDataBuilderInterface
 {
-    /**
-     * @param string @className
-     */
-    public function __construct($className);
-
     /**
      * @param array $values
      *

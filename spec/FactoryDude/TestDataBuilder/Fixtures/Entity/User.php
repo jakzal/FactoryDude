@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\FactoryDude\Fixtures\Entity;
+namespace spec\FactoryDude\TestDataBuilder\Fixtures\Entity;
 
 class User
 {

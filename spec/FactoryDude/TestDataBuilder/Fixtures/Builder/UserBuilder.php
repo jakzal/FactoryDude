@@ -1,15 +1,11 @@
 <?php
 
-namespace spec\FactoryDude\Fixtures\Builder;
+namespace spec\FactoryDude\TestDataBuilder\Fixtures\Builder;
 
-use FactoryDude\TestDataBuilderInterface;
+use FactoryDude\TestDataBuilder\TestDataBuilderInterface;
 
 class UserBuilder implements TestDataBuilderInterface
 {
-    public function __construct($className)
-    {
-    }
-
     public function build(array $values = array())
     {
     }

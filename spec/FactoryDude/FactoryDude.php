@@ -7,7 +7,7 @@ use PHPSpec2\Specification;
 class FactoryDude implements Specification
 {
     /**
-     * @param ObjectStub $builder mock of FactoryDude\TestDataBuilder
+     * @param ObjectStub $builder mock of FactoryDude\TestDataBuilder\TestDataBuilder
      */
     public function it_should_act_as_a_container($builder)
     {

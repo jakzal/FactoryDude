@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\FactoryDude;
+namespace spec\FactoryDude\TestDataBuilder;
 
 use PHPSpec2\Specification;
 
@@ -8,22 +8,22 @@ class TestDataBuilder implements Specification
 {
     public function described_with()
     {
-        $this->testDataBuilder->isAnInstanceOf('FactoryDude\\TestDataBuilder', array(
-            'spec\\FactoryDude\\Fixtures\\Entity\\User'
+        $this->testDataBuilder->isAnInstanceOf('FactoryDude\\TestDataBuilder\\TestDataBuilder', array(
+            'spec\\FactoryDude\\TestDataBuilder\\Fixtures\\Entity\\User'
         ));
     }
 
     public function it_should_return_a_class_name()
     {
         $this->testDataBuilder->getClassName()
-            ->shouldBe('spec\\FactoryDude\\Fixtures\\Entity\\User');
+            ->shouldBe('spec\\FactoryDude\\TestDataBuilder\\Fixtures\\Entity\\User');
     }
 
     public function it_should_create_an_entity_with_defaults()
     {
         $entity = $this->testDataBuilder->build();
 
-        $entity->shouldBeAnInstanceOf('spec\\FactoryDude\\Fixtures\\Entity\\User');
+        $entity->shouldBeAnInstanceOf('spec\\FactoryDude\\TestDataBuilder\\Fixtures\\Entity\\User');
         $entity->getId()->shouldReturn(null);
         $entity->getName()->shouldReturn('Anonymous');
         $entity->getCreatedAt()->shouldReturn(null);

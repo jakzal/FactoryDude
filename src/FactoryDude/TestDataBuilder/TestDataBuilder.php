@@ -1,6 +1,6 @@
 <?php
 
-namespace FactoryDude;
+namespace FactoryDude\TestDataBuilder;
 
 class TestDataBuilder implements TestDataBuilderInterface
 {
