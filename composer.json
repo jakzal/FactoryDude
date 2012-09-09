@@ -1,6 +1,7 @@
 {
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "pimple/pimple": "*"
     },
     "require-dev": {
         "phpspec/phpspec2": "*@dev"
