@@ -36,6 +36,18 @@ class EntityBuilder implements Specification
         $entity->getName()->shouldReturn('Kuba');
     }
 
+    public function it_should_set_up_private_entity_properties()
+    {
+        $date = new \DateTime('-1 day');
+        $entity = $this->entityBuilder
+            ->with('id', 13)
+            ->with('createdAt', $date)
+            ->build();
+
+        $entity->getId()->shouldReturn(13);
+        $entity->getCreatedAt()->shouldReturn($date);
+    }
+
     public function it_should_set_up_defaults()
     {
         $this->entityBuilder->isAnInstanceOf('FactoryDude\\TestDataBuilder\\EntityBuilder', array(
@@ -47,18 +59,6 @@ class EntityBuilder implements Specification
 
         $entity->getId()->shouldReturn(14);
         $entity->getName()->shouldReturn('Kuba');
-    }
-
-    public function it_should_set_up_private_entity_properties()
-    {
-        $date = new \DateTime('-1 day');
-        $entity = $this->entityBuilder
-            ->with('id', 13)
-            ->with('createdAt', $date)
-            ->build();
-
-        $entity->getId()->shouldReturn(13);
-        $entity->getCreatedAt()->shouldReturn($date);
     }
 
     public function it_should_complain_if_entity_property_does_not_exist()
@@ -98,22 +98,5 @@ class EntityBuilder implements Specification
             ->build(array('name' => function ($container) { return 'Kuba'; }));
 
         $entity->getName()->shouldReturn('Kuba');
-    }
-
-    public function it_should_accept_magic_calls_to_set_properties()
-    {
-        $entity = $this->entityBuilder
-            ->withId(13)
-            ->withName('Kuba')
-            ->build();
-
-        $entity->getId()->shouldReturn(13);
-        $entity->getName()->shouldReturn('Kuba');
-    }
-
-    public function it_should_complain_for_unkown_method()
-    {
-        $this->entityBuilder->shouldThrow('RuntimeException')->during('withId');
-        $this->entityBuilder->shouldThrow('RuntimeException')->during('getId');
     }
 }
