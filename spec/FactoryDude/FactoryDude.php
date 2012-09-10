@@ -35,7 +35,7 @@ class FactoryDude implements Specification
         $this->factoryDude->offsetGet('User');
     }
 
-    public function it_should_not_pass_the_world_to_the_non_builder()
+    public function it_should_not_pass_the_world_to_a_non_builder()
     {
         $this->factoryDude->offsetSet('User', function ($container) {
             $service = \Mockery::mock('stdClass');
@@ -45,5 +45,13 @@ class FactoryDude implements Specification
         });
 
         $this->factoryDude->offsetGet('User');
+    }
+
+    public function it_should_register_extensions($extension)
+    {
+        $extension->isAMockOf('FactoryDude\\Extension\\ExtensionInterface');
+        $extension->register()->shouldBeCalled();
+
+        $this->factoryDude->addExtension($extension);
     }
 }

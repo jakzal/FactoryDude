@@ -1,17 +1,12 @@
 {
     "require": {
         "php": ">=5.3.3",
-        "pimple/pimple": ">1.0.0@dev"
+        "pimple/pimple": ">1.0.0@dev",
+        "fzaninotto/faker": "*"
     },
     "require-dev": {
         "phpspec/phpspec2": "*@dev"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/jakzal/phpspec2"
-        }
-    ],
     "autoload": {
         "psr-0": {
             "FactoryDude": "src/",

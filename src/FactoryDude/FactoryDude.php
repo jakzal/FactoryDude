@@ -2,8 +2,15 @@
 
 namespace FactoryDude;
 
+use FactoryDude\Extension\ExtensionInterface;
+
 class FactoryDude extends \Pimple
 {
+    public function addExtension(ExtensionInterface $extension)
+    {
+        $extension->register($this);
+    }
+
     /**
      * @param string $id
      *

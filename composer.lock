@@ -1,6 +1,10 @@
 {
-    "hash": "5988cd019c4e6d2e8f95df5a19f734a3",
+    "hash": "382dafe58f59b299cdb5673720e2bf60",
     "packages": [
+        {
+            "package": "fzaninotto/faker",
+            "version": "v1.0.0"
+        },
         {
             "package": "pimple/pimple",
             "version": "dev-master",
@@ -16,8 +20,8 @@
         {
             "package": "phpspec/phpspec2",
             "version": "dev-master",
-            "source-reference": "d74c92314d1bdcafc90ec0d6af9f0d1b697adaa5",
-            "commit-date": "1347138483"
+            "source-reference": "5b2a68f77b3be97285240b6eaf91bc2d252ce53c",
+            "commit-date": "1347263775"
         },
         {
             "package": "symfony/console",
