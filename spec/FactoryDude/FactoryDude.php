@@ -7,7 +7,7 @@ use PHPSpec2\Specification;
 class FactoryDude implements Specification
 {
     /**
-     * @param ObjectStub $builder mock of FactoryDude\TestDataBuilder\TestDataBuilder
+     * @param Prophet $builder mock of FactoryDude\TestDataBuilder\TestDataBuilder
      */
     public function it_should_act_as_a_container($builder)
     {
@@ -20,13 +20,13 @@ class FactoryDude implements Specification
     }
 
     /**
-     * @param ObjectStub $builder mock of FactoryDude\TestDataBuilder\TestDataBuilder
+     * @param Prophet $builder mock of FactoryDude\TestDataBuilder\TestDataBuilder
      */
     public function it_should_pass_the_world_to_the_builder($builder)
     {
         // @todo until PHPSpec supports this...
         $builder = \Mockery::mock('FactoryDude\TestDataBuilder\TestDataBuilder');
-        $builder->shouldReceive('offsetSet')->once()->with('_world', $this->factoryDude->getStubSubject());
+        $builder->shouldReceive('offsetSet')->once()->with('_world', $this->factoryDude->getProphetSubject());
 
         $this->factoryDude->offsetSet('User', function ($container) use ($builder) {
             return $builder;
