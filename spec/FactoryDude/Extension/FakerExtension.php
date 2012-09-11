@@ -12,6 +12,7 @@ class FakerExtension implements Specification
 
         $this->fakerExtension->register($world);
 
-        $world->offsetGet('faker')->shouldBeAnInstanceOf('Faker\\Generator');
+        $world->offsetGet('faker')->shouldBeAnInstanceOf('FactoryDude\Extension\LazyCall');
+        $world->offsetGet('faker')->getSubject()->shouldBeAnInstanceOf('Faker\\Generator');
     }
 }

@@ -3,7 +3,7 @@
 namespace FactoryDude\Extension;
 
 use FactoryDude\FactoryDude;
-use \Faker\Factory as FakerFactory;
+use Faker\Factory as FakerFactory;
 
 class FakerExtension implements ExtensionInterface
 {
@@ -25,6 +25,6 @@ class FakerExtension implements ExtensionInterface
      */
     public function register(FactoryDude $world)
     {
-        $world['faker'] = FakerFactory::create($this->locale);
+        $world['faker'] = new LazyCall(FakerFactory::create($this->locale));
     }
 }
