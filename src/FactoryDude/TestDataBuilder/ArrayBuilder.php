@@ -13,7 +13,7 @@ class ArrayBuilder extends TestDataBuilder
     {
         $values = array_merge($this->getValues(), $values);
 
-        return $this->evaluateCallables($values);
+        return $this->callIfCallable($values);
     }
 
     /**
@@ -31,16 +31,6 @@ class ArrayBuilder extends TestDataBuilder
     }
 
     /**
-     * @param array $values
-     *
-     * @return array
-     */
-    private function evaluateCallables(array $values)
-    {
-        return array_map(array($this, 'callIfCallable'), $values);
-    }
-
-    /**
      * @param mixed $value
      *
      * @return mixed
@@ -49,6 +39,10 @@ class ArrayBuilder extends TestDataBuilder
     {
         if (is_callable($value)) {
             return $value($this);
+        }
+
+        if (is_array($value)) {
+            return array_map(array($this, 'callIfCallable'), $value);
         }
 
         return $value;

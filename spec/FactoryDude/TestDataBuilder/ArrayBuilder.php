@@ -21,6 +21,21 @@ class ArrayBuilder implements Specification
         $this->arrayBuilder->build()->shouldReturn(array());
     }
 
+    public function it_should_build_nested_arrays()
+    {
+        $result = $this->arrayBuilder->build(array(
+            'id' => 13,
+            'groups' => array(
+                2 => 'User',
+                3 => function ($container) {
+                    return 'Admin';
+                }
+            )
+        ));
+
+        $result->shouldBe(array('id' => 13, 'groups' => array(2 => 'User', 3 => 'Admin')));
+    }
+
     public function it_should_use_prepared_values()
     {
         $result = $this->arrayBuilder
